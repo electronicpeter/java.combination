@@ -7,33 +7,17 @@ import java.util.List;
 
 @Slf4j
 public class Combination {
-    public Cycles createCombinations(int numberOfElements, int groupSize) {
-        List<Integer> elements = createElements(numberOfElements);
-
-        int numberOfGroups = Double.valueOf(Math.ceil(Double.valueOf(numberOfElements) / Double.valueOf(groupSize))).intValue();
-        log.info("X numberOfElements {}, groups {}, groupsize {}", numberOfElements, numberOfGroups, groupSize);
-
-        Cycle firstCycle = new Cycle();
-        int e = 0;
-        for (int g = 0; g < numberOfGroups; g++) {
-            Group group = new Group();
-            group.addAll(elements.subList(e, Math.min(e + groupSize, numberOfElements)));
-            firstCycle.add(group);
-            e += groupSize;
-        }
-        if (e < numberOfElements) {
-            firstCycle.stream().findAny().get().addAll(elements.subList(e, numberOfElements));
-        }
-        return addRemainingCycles(firstCycle, numberOfElements);
-    }
-
     public Cycles createCombinations(int numberOfElements) {
         List<Integer> elements = createElements(numberOfElements);
 
-        int numberOfGroups = Double.valueOf(Math.ceil(Math.sqrt(numberOfElements))).intValue();
+        int dim = Double.valueOf(Math.ceil(Math.sqrt(numberOfElements))).intValue();
+        if (numberOfElements % 2 == 0) {
+            dim++;
+        }
 
-        Cycle firstCycle = new Cycle();
-        for (int g = 0; g < numberOfGroups; g++) {
+        // fill this square with the elements.
+        Cycle firstCycle = new Cycle(dim);
+        for (int g = 0; g < dim; g++) {
             firstCycle.add(new Group());
         }
         // log.info("numberOfElements {}, numberOfGroups {}, groupsize {}, remainder {}, e {}", numberOfElements, numberOfGroups, groupSize, numberOfElements - e, e);
@@ -77,7 +61,7 @@ public class Combination {
         yDim = xDim;
 
         for (int shift = 0; shift < xDim; shift++) {
-            Cycle cycle = new Cycle();
+            Cycle cycle = new Cycle(refCycle.getDim());
             for (int x = 0; x < xDim; x++) {
                 Group g = new Group();
                 for (int y = 0; y < yDim; y++) {
