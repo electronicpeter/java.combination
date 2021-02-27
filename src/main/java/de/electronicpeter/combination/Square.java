@@ -133,6 +133,9 @@ public class Square {
     private void initWithCircle(Integer numberOfElements, List<Integer> elements) {
         int x = dimension / 2;
         int y = dimension / 2;
+        if (dimension == 2) {
+            x = y = 0;
+        }
         if (!elements.isEmpty()) {
             array[x][y] = elements.get(0);
             elements.remove(0);
