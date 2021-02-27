@@ -44,6 +44,9 @@ public class Square {
             case SPACED:
                 initWithSpace(numberOfElements, elements);
                 return;
+            case CIRCLE:
+                initWithCircle(numberOfElements, elements);
+                return;
             default:
                 throw new RuntimeException("missing case for " + fillAlgorithm);
         }
@@ -127,6 +130,51 @@ public class Square {
             limit++;
         }
     }
+    private void initWithCircle(Integer numberOfElements, List<Integer> elements) {
+        int x = dimension / 2;
+        int y = dimension / 2;
+        if (!elements.isEmpty()) {
+            array[x][y] = elements.get(0);
+            elements.remove(0);
+        }
+        int limit = 1;
+        while (!elements.isEmpty()) {
+            // right
+            for (int i = 0; i<limit; i++) {
+                if (!elements.isEmpty()) {
+                    x++;
+                    array[x][y] = elements.get(0);
+                    elements.remove(0);
+                }
+            }
+            // down
+            for (int i = 0; i<limit; i++) {
+                if (!elements.isEmpty()) {
+                    y++;
+                    array[x][y] = elements.get(0);
+                    elements.remove(0);
+                }
+            }
+            limit++;
+            // left
+            for (int i = 0; i<limit; i++) {
+                if (!elements.isEmpty()) {
+                    x--;
+                    array[x][y] = elements.get(0);
+                    elements.remove(0);
+                }
+            }
+            // up
+            for (int i = 0; i<limit; i++) {
+                if (!elements.isEmpty()) {
+                    y--;
+                    array[x][y] = elements.get(0);
+                    elements.remove(0);
+                }
+            }
+            limit++;
+        }
+    }
 
     public Integer getDimension() {
         return dimension;
@@ -183,6 +231,7 @@ public class Square {
     public static enum FillAlgorithm {
         SQUARE,
         SQUARE2,
+        CIRCLE,
         ROW,
         SPACED
     }
