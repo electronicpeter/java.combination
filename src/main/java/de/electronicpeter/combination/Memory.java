@@ -58,18 +58,20 @@ public class Memory {
 
         StringBuilder sb = new StringBuilder();
         sb.append("\n");
+        sb.append("\\begin{bmatrix}");
         sb.append(String.format("%" + l +"s", " "));
         for (int col = 0; col < dimension; col++) {
-            sb.append(String.format("%" + l + "s", col));
+            sb.append(String.format("%" + l + "s&", col));
         }
-        sb.append("\n");
+        sb.append("\\\\ \n");
         for (int row = 0; row < dimension; row++) {
             sb.append(String.format("%" + l + "s", row));
             for (int col = 0; col < dimension; col++) {
-                sb.append(String.format("%" + l + "s", mem[row][col] > 0 ? mem[row][col] == 1 ? "." : mem[row][col] : " "));
+                sb.append(String.format("%" + l + "s &", mem[row][col] > 0 ? mem[row][col] == 1 ? "." : mem[row][col] : " "));
             }
-            sb.append("\n");
+            sb.append("\\\\ \n");
         }
+        sb.append("\\end{bmatrix}");
         return sb.toString();
     }
 

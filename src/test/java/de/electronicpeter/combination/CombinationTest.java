@@ -55,7 +55,7 @@ public class CombinationTest {
 
     @Test
     public void checkAny() {
-        check(25, Square.FillAlgorithm.ROW);
+        check(9, Square.FillAlgorithm.ROW);
     }
 
     private void check(int size) {
@@ -78,6 +78,11 @@ public class CombinationTest {
                     log.info("{}", combinations.getStatistics().toString());
                     log.info("{}", memory.getMemoryStatistic().toString());
                     log.info("{}", memory.toString());
+                    Cycles singleCycle = new Cycles();
+                    for (Cycle cycle : combinations) {
+                        singleCycle.add(cycle);
+                        log.info("{}", new Memory(size).set(singleCycle).toString());
+                    }
                 }
                 return;
             case OK:
