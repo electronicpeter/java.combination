@@ -53,9 +53,9 @@ public class CombinationTest {
         log.info("did find perfect groups for all tested numbers");
     }
 
-    // @Test
+    @Test
     public void checkAny() {
-        check(1973);
+        check(25, Square.FillAlgorithm.ROW);
     }
 
     private void check(int size) {

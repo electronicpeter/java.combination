@@ -13,10 +13,11 @@ public class Cycle extends ArrayList<Group> {
     }
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("\n");
+        sb.append("\\begin{bmatrix}\n");
         for (Group g : this) {
             sb.append(g);
         }
+        sb.append("\\end{bmatrix}\n");
         return sb.toString();
     }
 }
