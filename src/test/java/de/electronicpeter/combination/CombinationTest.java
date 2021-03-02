@@ -55,7 +55,7 @@ public class CombinationTest {
 
     @Test
     public void checkAny() {
-        check(9, Square.FillAlgorithm.ROW);
+        check(15, Square.FillAlgorithm.SPACED);
     }
 
     private void check(int size) {

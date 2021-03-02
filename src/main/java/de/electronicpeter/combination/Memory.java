@@ -34,6 +34,9 @@ public class Memory {
     }
 
     public Memory set(Group group) {
+        if (group.size() == 1) {
+            throw new RuntimeException("Group just contains one element");
+        }
         for (int groupIndex = 0; groupIndex < group.size(); groupIndex++) {
             int i1 = group.get(groupIndex);
             for (int remainderIndex = groupIndex + 1; remainderIndex < group.size(); remainderIndex++) {
